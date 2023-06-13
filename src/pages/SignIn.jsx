@@ -34,6 +34,7 @@ const SignIn = () => {
               value={inputs.email || ''}
               placeholder="Enter your email"
               id="email"
+              autoFocus={true}
               onChange={handleChange}
               className="border-2 border-gray-400 rounded-md py-2 px-4 w-full outline-none focus:border-blue-500"
             />
@@ -64,7 +65,7 @@ const SignIn = () => {
               />
             )}
           </div>
-          <div className="flex justify-between mb-4 font-semibold">
+          <div className="flex justify-between items-center mb-4 font-semibold">
             <p>
               Don't have an account?
               <span className="text-base text-red-500 hover:text-red-600 hover:dark:text-red-400 ml-1">

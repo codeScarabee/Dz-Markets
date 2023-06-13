@@ -31,7 +31,7 @@ const Layout = () => {
           />
         </div>
 
-        <nav className="mr-10 lg:w-[30%] md:w-[40%]">
+        <nav className="mr-10 hidden lg:w-[30%] md:w-[40%] sm:block sm:w-[40%]">
           <ul className="flex items-center justify-center w-full">
             <li
               className={`cursor-pointer font-semibold hover:bg-gray-200 hover:text-red-500 transition-colors duration-500 ${
