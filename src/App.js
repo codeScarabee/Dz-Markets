@@ -12,7 +12,7 @@ import Layout from './pages/Layout';
 
 function App() {
   return (
-    <main>
+    <main className="bg-lime-50 dark:bg-gray-800">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

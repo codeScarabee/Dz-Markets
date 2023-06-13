@@ -45,14 +45,14 @@ function SignUp() {
   }
   return (
     <>
-      <section className="flex justify-center items-center gap-5 flex-wrap max-w-5xl mx-auto h-screen text-lg">
+      <section className="flex justify-center items-center gap-5 flex-wrap max-w-7xl mx-auto h-screen">
         <div className="hidden md:block md:w-[70%] lg:w-[48%] shadow-2xl rounded-2xl">
           <img src={loginImg} alt="login" className="rounded-2xl w-full h-full" />
         </div>
 
         <div className="w-10/12 sm:w-10/12 md:w-[70%] lg:w-[48%] shadow-2xl rounded-2xl p-8">
           <h1 className="text-center text-2xl font-bold">Sign up to DzMarkets</h1>
-          <form className="w-full">
+          <form className="w-full" onSubmit={handleSubmit}>
             <div className={isUserValid ? 'mb-4' : ''}>
               <label htmlFor="username" className=" inline-block text-sm font-bold mb-1">
                 Username
@@ -123,22 +123,22 @@ function SignUp() {
               <p className="text-xs text-red-500 p-1 mb-2">Password must contain at least 8 characters</p>
             )}
 
-            <div className="flex justify-between items-center mb-4 font-semibold p-1">
+            <div className="flex justify-between items-center text-sm mb-4 font-semibold p-1">
               <p>
                 Already a member?
-                <span className="text-base text-red-500 hover:text-red-600 hover:dark:text-red-400 ml-1">
+                <span className="text-sm text-red-500 hover:text-red-600 hover:dark:text-red-400 ml-1">
                   <Link to={'/sign-in'}>Log in</Link>
                 </span>
               </p>
               <Link
                 to={'/forgot-password'}
-                className="text-base text-blue-500 hover:text-blue-600 hover:dark:text-blue-400"
+                className="text-sm text-blue-500 hover:text-blue-600 hover:dark:text-blue-400"
               >
                 Forgot password?
               </Link>
             </div>
 
-            <button type="submit" onClick={handleSubmit} className="btn bg-blue-500 font-bold w-full mx-auto mb-2">
+            <button type="submit" className="btn bg-blue-500 font-bold w-full mx-auto mb-2">
               Sign Up
             </button>
             <p className="text-sm p-1">

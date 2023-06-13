@@ -12,7 +12,7 @@ const Layout = () => {
   }
   return (
     <>
-      <div className="flex items-center max-w-7xl mx-auto px-4 shadow-lg sticky top-0 z-50 bg-gray-500/20 mb-8">
+      <header className="flex items-center max-w-7xl mx-auto px-4 shadow-lg sticky top-0 z-50 bg-gray-500/20 mb-8">
         <label className="hover:bg-gray-200 btn border-none btn-circle swap swap-rotate bg-transparent">
           <input type="checkbox" />
           <svg className="swap-off  " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
@@ -31,7 +31,7 @@ const Layout = () => {
           />
         </div>
 
-        <nav className="mr-10 hidden lg:w-[30%] md:w-[40%] sm:block sm:w-[40%]">
+        <nav className="mr-10 hidden lg:w-[30%] md:w-[40%] sm:block sm:w-[45%]">
           <ul className="flex items-center justify-center w-full">
             <li
               className={`cursor-pointer font-semibold hover:bg-gray-200 hover:text-red-500 transition-colors duration-500 ${
@@ -63,7 +63,7 @@ const Layout = () => {
           </ul>
         </nav>
         <Darkmode />
-      </div>
+      </header>
       <Outlet />
     </>
   );
