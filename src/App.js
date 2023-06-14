@@ -12,7 +12,7 @@ import Layout from './pages/Layout';
 
 function App() {
   return (
-    <main className="bg-lime-50 dark:bg-gray-800">
+    <main className="min-h-screen">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

@@ -4,7 +4,7 @@ import { db } from '../firebase';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
 import OAuth from '../components/OAuth';
 import loginImg from '../assets/images/signup.jpg';
 
@@ -45,7 +45,7 @@ function SignUp() {
   }
   return (
     <>
-      <section className="flex justify-center items-center gap-5 flex-wrap max-w-7xl mx-auto h-screen">
+      <section className="flex justify-center items-center gap-5 flex-wrap max-w-7xl mx-auto min-h-screen">
         <div className="hidden md:block md:w-[70%] lg:w-[48%] shadow-2xl rounded-2xl">
           <img src={loginImg} alt="login" className="rounded-2xl w-full h-full" />
         </div>
@@ -53,7 +53,7 @@ function SignUp() {
         <div className="w-10/12 sm:w-10/12 md:w-[70%] lg:w-[48%] shadow-2xl rounded-2xl p-8">
           <h1 className="text-center text-2xl font-bold">Sign up to DzMarkets</h1>
           <form className="w-full" onSubmit={handleSubmit}>
-            <div className={isUserValid ? 'mb-4' : ''}>
+            <div className={isUserValid ? 'relative mb-4' : 'relative'}>
               <label htmlFor="username" className=" inline-block text-sm font-bold mb-1">
                 Username
               </label>
@@ -61,20 +61,21 @@ function SignUp() {
                 type="text"
                 name="username"
                 value={username || ''}
-                placeholder="Enter your username"
+                placeholder={'Enter your username'}
                 id="username"
                 autoFocus={true}
                 onChange={handleChange}
                 onBlur={() => (username && username.length > 2 ? setIsUserValid(true) : setIsUserValid(false))}
                 className={
                   isUserValid
-                    ? 'border-2 border-gray-400 rounded-md py-2 px-4  w-full outline-none focus:border-blue-500'
-                    : 'border-2 border-red-500 rounded-md py-2 px-4  w-full outline-none focus:border-blue-500'
+                    ? 'border-2 border-gray-400 rounded-md py-2 pl-10  w-full outline-none focus:border-blue-500'
+                    : 'border-2 border-red-500 rounded-md py-2 pl-10  w-full outline-none focus:border-blue-500'
                 }
               />
-              {!isUserValid && <p className="text-xs text-red-500 p-1">Username must contain at least 3 characters</p>}
+              <FaUser className="absolute bottom-3 left-3 text-blue-500 text-xl" />
             </div>
-            <div className="mb-4">
+            {!isUserValid && <p className="text-xs text-red-500 p-1">Username must contain at least 3 characters</p>}
+            <div className="relative mb-4">
               <label htmlFor="email" className=" inline-block text-sm font-bold mb-1">
                 Email
               </label>
@@ -85,8 +86,9 @@ function SignUp() {
                 placeholder="Enter your email"
                 id="email"
                 onChange={handleChange}
-                className="border-2 border-gray-400 rounded-md py-2 px-4 w-full outline-none focus:border-blue-500"
+                className="border-2 border-gray-400 rounded-md py-2 pl-10  w-full outline-none focus:border-blue-500"
               />
+              <FaEnvelope className="absolute bottom-3 left-3 text-blue-500 text-xl" />
             </div>
 
             <div className={isPassValid ? 'relative mb-4' : 'relative'}>
@@ -103,37 +105,35 @@ function SignUp() {
                 onBlur={() => (password && password.length > 7 ? setIsPassValid(true) : setIsPassValid(false))}
                 className={
                   isPassValid
-                    ? 'border-2 border-gray-400 rounded-md py-2 px-4  w-full outline-none focus:border-blue-500'
-                    : 'border-2 border-red-500 rounded-md py-2 px-4  w-full outline-none focus:border-blue-500'
+                    ? 'border-2 border-gray-400 rounded-md py-2 pl-10  w-full outline-none focus:border-blue-500'
+                    : 'border-2 border-red-500 rounded-md py-2 pl-10  w-full outline-none focus:border-blue-500'
                 }
               />
               {showPass ? (
                 <FaEyeSlash
-                  className="absolute right-4 bottom-4 cursor-pointer"
+                  className="absolute right-3 bottom-3 text-lg cursor-pointer"
                   onClick={() => setShowPass((prev) => !prev)}
                 />
               ) : (
                 <FaEye
-                  className="absolute right-4 bottom-4 cursor-pointer"
+                  className="absolute right-3 bottom-3 text-lg cursor-pointer"
                   onClick={() => setShowPass((prev) => !prev)}
                 />
               )}
+              <FaLock className="absolute bottom-3 left-3 text-blue-500 text-xl" />
             </div>
+
             {!isPassValid && (
               <p className="text-xs text-red-500 p-1 mb-2">Password must contain at least 8 characters</p>
             )}
-
             <div className="flex justify-between items-center text-sm mb-4 font-semibold p-1">
               <p>
                 Already a member?
-                <span className="text-sm text-red-500 hover:text-red-600 hover:dark:text-red-400 ml-1">
+                <span className="text-red-500 hover:text-red-600 hover:dark:text-red-400 ml-1">
                   <Link to={'/sign-in'}>Log in</Link>
                 </span>
               </p>
-              <Link
-                to={'/forgot-password'}
-                className="text-sm text-blue-500 hover:text-blue-600 hover:dark:text-blue-400"
-              >
+              <Link to={'/forgot-password'} className="text-blue-500 hover:text-blue-600 hover:dark:text-blue-400">
                 Forgot password?
               </Link>
             </div>
