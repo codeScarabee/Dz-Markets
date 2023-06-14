@@ -1,20 +1,33 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { FaEye, FaEyeSlash, FaEnvelope, FaLock } from 'react-icons/fa';
 import OAuth from '../components/OAuth';
 import loginImg from '../assets/images/login-key.jpg';
+import { toast } from 'react-toastify';
 
 const SignIn = () => {
   const [inputs, setInputs] = useState({});
   const [showPass, setShowPass] = useState(false);
+  const navigate = useNavigate();
+  const { email, password } = inputs;
+
   const handleChange = (e) => {
-    const name = e.target.name;
+    const id = e.target.name;
     const value = e.target.value;
-    setInputs((inputs) => ({ ...inputs, [name]: value }));
+    setInputs((inputs) => ({ ...inputs, [id]: value }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputs);
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      if (userCredential.user) {
+        navigate('/');
+      }
+    } catch (error) {
+      toast.error('Incorrect email or password.');
+    }
   };
   return (
     <section className="flex justify-center items-center gap-5 flex-wrap max-w-7xl mx-auto min-h-screen">
@@ -24,7 +37,7 @@ const SignIn = () => {
 
       <div className="w-10/12 sm:w-10/12 md:w-[70%] lg:w-[48%] shadow-2xl rounded-2xl p-8">
         <h1 className="text-center text-2xl font-bold">
-          Hello! <h2>Welcome Back</h2>
+          Hello! <p>Welcome Back</p>
         </h1>
         <form className="w-full" onSubmit={handleSubmit}>
           <div className="relative mb-4">
@@ -34,10 +47,10 @@ const SignIn = () => {
             <input
               type="email"
               name="email"
-              value={inputs.email || ''}
+              value={email || ''}
               placeholder="Enter your email"
               id="email"
-              autoFocus={true}
+              autoFocus
               onChange={handleChange}
               className="border-2 border-gray-400 rounded-md py-2 pl-10 w-full outline-none focus:border-blue-500"
             />
@@ -51,7 +64,7 @@ const SignIn = () => {
             <input
               type={showPass ? 'text' : 'password'}
               name="password"
-              value={inputs.password || ''}
+              value={password || ''}
               placeholder="Enter your password"
               id="password"
               onChange={handleChange}
@@ -70,7 +83,7 @@ const SignIn = () => {
             )}
             <FaLock className="absolute bottom-3 left-3 text-blue-500 text-xl" />
           </div>
-          <div className="flex justify-between items-center text-sm mb-4 font-semibold p-1">
+          <div className="flex justify-between items-center flex-wrap text-sm mb-4 font-semibold p-1">
             <p>
               Not registered yet?
               <span className="text-red-500 hover:text-red-600 hover:dark:text-red-400 ml-1">

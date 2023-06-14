@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+import { toast } from 'react-toastify';
 import OAuth from '../components/OAuth';
 import loginImg from '../assets/images/login-key.jpg';
 import { FaEnvelope } from 'react-icons/fa';
@@ -10,8 +12,15 @@ const ForgotPass = () => {
     const value = e.target.value;
     setEmail(() => value);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const auth = getAuth();
+      await sendPasswordResetEmail(auth, email);
+      toast.success('Email was sent successfully');
+    } catch (error) {
+      toast.error('Wrong email');
+    }
   };
   return (
     <section className="flex justify-center items-center gap-5 flex-wrap max-w-7xl mx-auto h-screen">
@@ -37,7 +46,7 @@ const ForgotPass = () => {
             />
             <FaEnvelope className="absolute bottom-3 left-3 text-blue-500 text-xl" />
           </div>
-          <div className="flex justify-between items-center text-sm mb-4 font-semibold p-1">
+          <div className="flex justify-between items-center flex-wrap text-sm mb-4 font-semibold p-1">
             <p>
               Don't have an account?
               <span className="text-red-500 hover:text-red-600 hover:dark:text-red-400 ml-1">

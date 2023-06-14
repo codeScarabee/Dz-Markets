@@ -126,7 +126,7 @@ function SignUp() {
             {!isPassValid && (
               <p className="text-xs text-red-500 p-1 mb-2">Password must contain at least 8 characters</p>
             )}
-            <div className="flex justify-between items-center text-sm mb-4 font-semibold p-1">
+            <div className="flex justify-between items-center flex-wrap text-sm mb-4 font-semibold p-1">
               <p>
                 Already a member?
                 <span className="text-red-500 hover:text-red-600 hover:dark:text-red-400 ml-1">
